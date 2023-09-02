@@ -1,0 +1,42 @@
+// schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:SUA_SENHA@localhost:5432/NOME_DO_SEU_BANCO_DE_DADOS"
+}
+
+model Jogador {
+  id     Int      @id @default(autoincrement())
+  Nome   String
+  Idade  Int
+  time   Time     @relation(fields: [time_id], references: [id])
+  time_id Int
+}
+
+model Time {
+  id          Int           @id @default(autoincrement())
+  Nome        String
+  Fundacao    DateTime
+  jogadores   Jogador[]
+  campeonatos CampeonatoTime[]
+}
+
+model Campeonato {
+  id         Int           @id @default(autoincrement())
+  Nome       String
+  DataInicio DateTime
+  DataFim    DateTime
+  times      CampeonatoTime[]
+}
+
+model CampeonatoTime {
+  id           Int       @id @default(autoincrement())
+  time         Time      @relation(fields: [time_id], references: [id])
+  time_id      Int
+  campeonato   Campeonato @relation(fields: [campeonato_id], references: [id])
+  campeonato_id Int
+  @@unique([time_id, campeonato_id])
+}
