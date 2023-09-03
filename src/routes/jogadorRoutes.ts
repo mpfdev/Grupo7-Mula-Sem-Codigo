@@ -4,6 +4,6 @@ import prisma from '../database/db';
 
 const router = express.Router();
 
-router.get('/jogador', getAllJogadores);
+router.get('/jogadores', getAllJogadores);
 
 export default router;
