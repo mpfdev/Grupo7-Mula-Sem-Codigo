@@ -5,7 +5,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:SUA_SENHA@localhost:5432/NOME_DO_SEU_BANCO_DE_DADOS"
+  url      = "postgresql://postgres:SUA_SENHA@localhost:5432/NOME_DO_SEU_BANCO"
 }
 
 model Jogador {
