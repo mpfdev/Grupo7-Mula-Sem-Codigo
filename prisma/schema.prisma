@@ -5,13 +5,13 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:SUA_SENHA@localhost:5432/NOME_DO_SEU_BANCO"
+  url      = "postgresql://postgres:1123@localhost:5432/desafio-2?schema=public"
 }
 
 model Jogador {
   id     Int      @id @default(autoincrement())
   Nome   String
-  Idade  Int
+  Idade  Decimal
   time   Time     @relation(fields: [time_id], references: [id])
   time_id Int
 }

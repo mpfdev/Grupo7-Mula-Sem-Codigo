@@ -15,3 +15,25 @@ export const getAllTimes = async (req: Request, res: Response) => {
 
     }
 }
+
+export class newTime{
+    async handle(req: Request, res: Response){
+        const { Nome, Fundacao } = req.body;
+
+        try{
+        const time = await prisma.time.create({
+            data: {
+                Nome,
+                Fundacao
+            },
+        });
+
+        return res.status(201).json(time);
+    }catch (e) {
+
+        console.error(`Error: Ao buscar a lista de jogadores ${e}`);
+        res.status(500).json({message: `Erro interno do servidor`});
+    }
+
+}
+}

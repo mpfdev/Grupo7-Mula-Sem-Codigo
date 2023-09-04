@@ -1,11 +1,12 @@
 {
   "name": "desafio-2",
   "version": "1.0.0",
-  "description": "",
+  "description": "Grupo para o Desafio 02 - Bootcamp em desenvolvimento Full Stack da Atlatico Avanti",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node-dev  --ignore-watch node_modules --respawn  --files src/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,7 @@
     "express": "^4.18.2",
     "pg": "^8.11.3",
     "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.2.2"
   },
   "devDependencies": {
