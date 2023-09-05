@@ -1,6 +1,5 @@
 import express from 'express';
-import { getAllJogadores } from '../controllers/jogadorControllers';
-import { newJogador } from '../controllers/jogadorControllers';
+import { getAllJogadores, newJogador} from '../controllers/jogadorControllers';
 import prisma from '../database/db';
 
 const router = express.Router();
@@ -10,9 +9,8 @@ const router = express.Router();
 
 router.get('/jogadores', getAllJogadores);
 
+//Rota de criação de jogador
 const newjogador = new newJogador();
 router.post('/jogador', newjogador.handle);
-
-
 
 export default router;

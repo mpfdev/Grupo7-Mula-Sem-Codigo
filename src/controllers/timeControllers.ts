@@ -4,7 +4,7 @@ import prisma from '../database/db';
 export const getAllTimes = async (req: Request, res: Response) => {
     try {
 
-        const times = prisma.time.findMany();
+        const times = await prisma.time.findMany();
 
         res.json(times);
 
@@ -31,7 +31,7 @@ export class newTime{
         return res.status(201).json(time);
     }catch (e) {
 
-        console.error(`Error: Ao buscar a lista de jogadores ${e}`);
+        console.error(`Error: Ao criar time ${e}`);
         res.status(500).json({message: `Erro interno do servidor`});
     }
 

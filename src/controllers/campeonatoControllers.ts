@@ -5,10 +5,9 @@ export const getAllCampeonatos = async (req: Request, res: Response) => {
     
     try {
 
-        const campeonatos = prisma.campeonato.findMany();
+        const campeonatos = await prisma.campeonato.findMany();
 
-        res.json(campeonatos);
-
+        return res.status(201).json(campeonatos);
     } catch (e) {
 
         console.error(`Error: Ao buscar a lista de campeonatos ${e}`);
@@ -32,7 +31,29 @@ export class newCampeonato{
         return res.status(201).json(campeonato);
     }catch (e) {
 
-        console.error(`Error: Ao buscar a lista de jogadores ${e}`);
+        console.error(`Error: Ao criar campeonato ${e}`);
+        res.status(500).json({message: `Erro interno do servidor`});
+    }
+
+}
+}
+//Rota 
+export class timeOnCampeonato{
+    async handle(req: Request, res: Response){
+        const { time_id, campeonato_id } = req.body;
+
+        try{
+        const campeonatoTime = await prisma.campeonatoTime.create({
+            data: {
+                time_id,
+                campeonato_id
+            },
+        });
+
+        return res.status(201).json(campeonatoTime);
+    }catch (e) {
+
+        console.error(`Error: Ao adicionar time em campeonato ${e}`);
         res.status(500).json({message: `Erro interno do servidor`});
     }
 

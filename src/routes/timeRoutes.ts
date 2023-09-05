@@ -1,7 +1,6 @@
 import express from 'express';
-import { getAllTimes } from '../controllers/timeControllers';
+import { getAllTimes, newTime } from '../controllers/timeControllers';
 import prisma from '../database/db';
-import { newTime } from '../controllers/timeControllers';
 
 const router = express.Router();
 

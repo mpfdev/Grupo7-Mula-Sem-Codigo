@@ -6,7 +6,7 @@ export const getAllJogadores = async (req: Request, res: Response) => {
     
     try {
 
-        const jogadores = prisma.jogador.findMany({
+        const jogadores = await prisma.jogador.findMany({
             include: {
                 time: true
             }
@@ -26,7 +26,7 @@ export class newJogador{
         const { Nome, Idade, time_id } = req.body;
 
         try{
-        const jogador = await prisma.jogador.create({
+        const createjogador = await prisma.jogador.create({
             data: {
                 Nome,
                 Idade,
@@ -34,10 +34,10 @@ export class newJogador{
             },
         });
 
-        return res.status(201).json(jogador);
+        return res.status(201).json(createjogador);
     }catch (e) {
 
-        console.error(`Error: Ao buscar a lista de jogadores ${e}`);
+        console.error(`Error: Ao criar jogador ${e}`);
         res.status(500).json({message: `Erro interno do servidor`});
     }
 
