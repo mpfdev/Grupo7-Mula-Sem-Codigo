@@ -1,11 +1,13 @@
 import {Request, Response} from 'express';
 import prisma from '../database/db';
+import { PrismaClient } from '@prisma/client';
 
+//GET
 export const getAllJogadores = async (req: Request, res: Response) => {
     
     try {
 
-        const jogadores = prisma.jogador.findMany({
+        const jogadores = await prisma.jogador.findMany({
             include: {
                 time: true
             }

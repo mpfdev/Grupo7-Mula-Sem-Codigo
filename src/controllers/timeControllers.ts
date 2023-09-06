@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import prisma from '../database/db';
 
+//GET
 export const getAllTimes = async (req: Request, res: Response) => {
     try {
 
