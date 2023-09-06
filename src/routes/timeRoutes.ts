@@ -1,12 +1,11 @@
 import express from 'express';
-import { getAllTimes, newTime } from '../controllers/timeControllers';
+import { getAllTimes, updateTime} from '../controllers/timeControllers';
 import prisma from '../database/db';
 
 const router = express.Router();
 
 router.get('/times', getAllTimes);
 
-const newtime = new newTime();
-router.post('/time', newtime.handle);
+router.put('/time/:id', updateTime);
 
 export default router;

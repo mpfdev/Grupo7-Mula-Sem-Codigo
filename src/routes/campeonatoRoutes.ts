@@ -1,16 +1,12 @@
 import express from 'express';
-import { getAllCampeonatos, timeOnCampeonato, newCampeonato } from '../controllers/campeonatoControllers';
+import { getAllCampeonatos, } from '../controllers/campeonatoControllers';
 import prisma from '../database/db';
+import { updateJogador } from '../controllers/jogadorControllers';
 
 const router = express.Router();
 
 router.get('/campeonatos', getAllCampeonatos);
 
-const newcampeonato = new newCampeonato();
-router.post('/campeonato', newcampeonato.handle);
-
-//Rota de criação time
-const timeoncampeonato = new timeOnCampeonato();
-router.post('/timecampeonato', timeoncampeonato.handle);
+router.put('/campeonato/:id', updateJogador);
 
 export default router;

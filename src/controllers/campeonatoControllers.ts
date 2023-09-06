@@ -1,6 +1,7 @@
 import {Request, Response} from 'express';
 import prisma from '../database/db';
 
+//GET
 export const getAllCampeonatos = async (req: Request, res: Response) => {
     
     try {
@@ -15,47 +16,27 @@ export const getAllCampeonatos = async (req: Request, res: Response) => {
     }
 }
 
-export class newCampeonato{
-    async handle(req: Request, res: Response){
-        const { Nome, DataInicio, DataFim } = req.body;
+export const updateCampeonato = async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+    const {nome, DataInicio, DataFim} = req.body;    
 
-        try{
-        const campeonato = await prisma.campeonato.create({
-            data: {
-                Nome,
-                DataInicio,
-                DataFim
+    try{
+        const updateCampeonato = await prisma.campeonato.update({
+            where: {
+                id: id,
             },
-        });
-
-        return res.status(201).json(campeonato);
-    }catch (e) {
-
-        console.error(`Error: Ao criar campeonato ${e}`);
-        res.status(500).json({message: `Erro interno do servidor`});
-    }
-
-}
-}
-//Rota 
-export class timeOnCampeonato{
-    async handle(req: Request, res: Response){
-        const { time_id, campeonato_id } = req.body;
-
-        try{
-        const campeonatoTime = await prisma.campeonatoTime.create({
             data: {
-                time_id,
-                campeonato_id
+                Nome: nome,
+                DataInicio: DataInicio,
+                DataFim: DataFim
             },
-        });
+        })
 
-        return res.status(201).json(campeonatoTime);
-    }catch (e) {
-
-        console.error(`Error: Ao adicionar time em campeonato ${e}`);
-        res.status(500).json({message: `Erro interno do servidor`});
+        res.json(updateCampeonato);
     }
+    catch (e) {
+        console.error(e);
+        res.status(500).json({message: 'Erro interno do servidor'});
+    }
+}
 
-}
-}

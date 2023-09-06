@@ -2,6 +2,7 @@ import {Request, Response} from 'express';
 import prisma from '../database/db';
 import { PrismaClient } from '@prisma/client';
 
+//GET
 export const getAllJogadores = async (req: Request, res: Response) => {
     
     try {
@@ -21,25 +22,27 @@ export const getAllJogadores = async (req: Request, res: Response) => {
     }
 }
 
-export class newJogador{
-    async handle(req: Request, res: Response){
-        const { Nome, Idade, time_id } = req.body;
+//PUT
+export const updateJogador = async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+    const {nome, idade, timeId} = req.body;    
 
-        try{
-        const createjogador = await prisma.jogador.create({
-            data: {
-                Nome,
-                Idade,
-                time_id
+    try{
+        const updateJogador = await prisma.jogador.update({
+            where: {
+                id: id,
             },
-        });
+            data: {
+                Nome: nome,
+                Idade: idade,
+                time_id: timeId
+            },
+        })
 
-        return res.status(201).json(createjogador);
-    }catch (e) {
-
-        console.error(`Error: Ao criar jogador ${e}`);
-        res.status(500).json({message: `Erro interno do servidor`});
+        res.json(updateJogador);
     }
-
-}
+    catch (e) {
+        console.error(e);
+        res.status(500).json({message: 'Erro interno do servidor'});
+    }
 }
