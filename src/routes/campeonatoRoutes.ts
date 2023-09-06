@@ -7,6 +7,6 @@ const router = express.Router();
 router.get('/campeonatos', getAllCampeonatos);
 router.put('/campeonato/:id', updateCampeonato);
 router.post('/campeonato', newCampeonato);
-router.post('/campeonato', newTimeOnCampeonato);
+router.post('/timecampeonato', newTimeOnCampeonato);
 
 export default router;
