@@ -59,3 +59,21 @@ export const newTime = async (req: Request, res: Response,) =>{
 }
 
 }
+
+export const deleteTime = async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+
+    try{
+        const deleteUser = await prisma.time.delete({
+            where: {
+                id: id,
+            }
+        })
+
+        res.json(deleteUser);
+    }
+    catch (e) {
+        console.error(e);
+        res.status(500).json({message: 'Erro interno do servidor'});
+    }
+}
