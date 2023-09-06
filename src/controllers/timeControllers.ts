@@ -39,3 +39,23 @@ export const updateTime = async (req: Request, res: Response) => {
         res.status(500).json({message: 'Erro interno do servidor'});
     }
 }
+
+export const newTime = async (req: Request, res: Response,) =>{
+    const { Nome, Fundacao } = req.body;
+
+    try{
+    const time = await prisma.time.create({
+        data: {
+            Nome,
+            Fundacao
+        },
+    });
+
+    return res.status(201).json(time);
+}catch (e) {
+
+    console.error(`Error: Ao criar time ${e}`);
+    res.status(500).json({message: `Erro interno do servidor`});
+}
+
+}
