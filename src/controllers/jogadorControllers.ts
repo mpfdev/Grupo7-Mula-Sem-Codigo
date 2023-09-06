@@ -45,3 +45,25 @@ export const updateJogador = async (req: Request, res: Response) => {
         res.status(500).json({message: 'Erro interno do servidor'});
     }
 }
+
+//POST
+export const newJogador = async (req: Request, res: Response) =>{
+    const { Nome, Idade, time_id } = req.body;
+
+    try{
+    const createjogador = await prisma.jogador.create({
+        data: {
+            Nome,
+            Idade,
+            time_id
+        },
+    });
+
+    return res.status(201).json(createjogador);
+}catch (e) {
+
+    console.error(`Error: Ao criar jogador ${e}`);
+    res.status(500).json({message: `Erro interno do servidor`});
+}
+
+}
