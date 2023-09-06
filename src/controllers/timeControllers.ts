@@ -17,7 +17,6 @@ export const getAllTimes = async (req: Request, res: Response) => {
     }
 }
 
-//PUT
 export const updateTime = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
     const {nome, fundacao} = req.body;    

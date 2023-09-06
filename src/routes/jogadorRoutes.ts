@@ -1,5 +1,7 @@
 import express from 'express';
-import { getAllJogadores, newJogador, updateJogador} from '../controllers/jogadorControllers';
+
+import {getAllJogadores, updateJogador, newJogador} from '../controllers/jogadorControllers';
+
 import prisma from '../database/db';
 
 const router = express.Router();
