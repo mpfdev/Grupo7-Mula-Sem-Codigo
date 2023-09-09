@@ -80,3 +80,20 @@ export const newTimeOnCampeonato = async (req: Request, res: Response) =>{
 
 }
 
+export const deleteCampeonato = async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+
+    try{
+        const deleteCampeonato = await prisma.campeonato.delete({
+            where: {
+                id: id,
+            }
+        })
+
+        res.json(deleteCampeonato);
+    }
+    catch (e) {
+        console.error(e);
+        res.status(500).json({message: 'Erro interno do servidor'});
+    }
+}

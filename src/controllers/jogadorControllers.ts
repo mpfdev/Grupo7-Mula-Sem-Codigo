@@ -22,7 +22,6 @@ export const getAllJogadores = async (req: Request, res: Response) => {
     }
 }
 
-//PUT
 export const updateJogador = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
     const {nome, idade, timeId} = req.body;    

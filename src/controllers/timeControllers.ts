@@ -17,7 +17,6 @@ export const getAllTimes = async (req: Request, res: Response) => {
     }
 }
 
-//PUT
 export const updateTime = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
     const {nome, fundacao} = req.body;    
@@ -59,4 +58,22 @@ export const newTime = async (req: Request, res: Response,) =>{
     res.status(500).json({message: `Erro interno do servidor`});
 }
 
+}
+
+export const deleteTime = async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+
+    try{
+        const deleteUser = await prisma.time.delete({
+            where: {
+                id: id,
+            }
+        })
+
+        res.json(deleteUser);
+    }
+    catch (e) {
+        console.error(e);
+        res.status(500).json({message: 'Erro interno do servidor'});
+    }
 }
