@@ -17,6 +17,30 @@ export const getAllTimes = async (req: Request, res: Response) => {
     }
 }
 
+export const getTimeId = async (req: Request, res: Response) => {
+    const { id } = req.body
+    try {
+        const TimeId = await prisma.time.findUnique({
+                where: {
+                    id: id,
+                },
+                
+            })
+            
+            if(!TimeId === null){
+                res.json(TimeId);
+            }else{
+                res.json('Time inexistente');
+            }
+
+    } catch (e) {
+
+        console.error(`Error: Ao buscar a lista de jogadores ${e}`);
+        res.status(500).json({message: `Erro interno do servidor`});
+    }
+
+}
+
 export const updateTime = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
     const {nome, fundacao} = req.body;    
