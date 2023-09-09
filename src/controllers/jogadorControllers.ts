@@ -65,5 +65,22 @@ export const newJogador = async (req: Request, res: Response) =>{
     console.error(`Error: Ao criar jogador ${e}`);
     res.status(500).json({message: `Erro interno do servidor`});
 }
+}
+
+export const deleteJogador = async(req: Request, res: Response) => {
+    const { Nome } = req.body;
+
+    try{
+    const deleteJogador = await prisma.jogador.deleteMany({
+        where: {
+            Nome
+        },
+    });
+    res.json(deleteJogador);
+}catch (e) {
+
+    console.error(`Error: Ao deletar jogador ${e}`);
+    res.status(500).json({message: `Erro interno do servidor`});
+}
 
 }
