@@ -16,6 +16,30 @@ export const getAllCampeonatos = async (req: Request, res: Response) => {
     }
 }
 
+export const getCampeonatoId = async (req: Request, res: Response) => {
+    const { id } = req.body
+    try {
+        const campeonatoId = await prisma.campeonato.findUnique({
+                where: {
+                    id: id,
+                },
+                
+            })
+            
+            if(!campeonatoId === null){
+                res.json(campeonatoId);
+            }else{
+                res.json('Campeonato inexistente');
+            }
+
+    } catch (e) {
+
+        console.error(`Error: Ao buscar a lista de jogadores ${e}`);
+        res.status(500).json({message: `Erro interno do servidor`});
+    }
+
+}
+
 export const updateCampeonato = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
     const {nome, DataInicio, DataFim} = req.body;    
