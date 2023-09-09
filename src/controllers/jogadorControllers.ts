@@ -22,6 +22,30 @@ export const getAllJogadores = async (req: Request, res: Response) => {
     }
 }
 
+export const getJogadorId = async (req: Request, res: Response) => {
+    const { id } = req.body
+    try {
+        const jogadorId = await prisma.jogador.findUnique({
+                where: {
+                    id: id,
+                },
+                
+            })
+            
+            if(!jogadorId === null){
+                res.json(jogadorId);
+            }else{
+                res.json('Usuário inexistente');
+            }
+
+    } catch (e) {
+
+        console.error(`Error: Ao buscar a lista de jogadores ${e}`);
+        res.status(500).json({message: `Erro interno do servidor`});
+    }
+
+}
+
 export const updateJogador = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
     const {nome, idade, timeId} = req.body;    
@@ -57,6 +81,9 @@ export const newJogador = async (req: Request, res: Response) =>{
             Idade,
             time_id
         },
+         include:{
+            time: true
+        }
     });
 
     return res.status(201).json(createjogador);
